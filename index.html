@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        #app{
+          width: 1000px;
+          margin: 10px auto;
+
+        }
+        .tb{
+          border-collapse: collapse;
+          widows: 100%;       
+        }
+        
+        .tb th{
+          background-color:#0094ff;
+          color: white;
+        }
+        .tb td,
+        .tb th{
+          padding:5px;
+          border:1px solid black;
+          text-align: center;
+        }
+        .add{
+          padding: 5px;
+          border:1px solid black;
+          margin-bottom: 10px;
+        }
+
+      
+    </style>
+    <title>lxzd</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="add">
+        设备IP：
+        <input type="text" v-model="itemname">
+        <input type="button" value="添加" @click="addEquip()">
+      </div>
+
+    <div>
+      <table class="tb">
+        <tr>
+          <th>序号</th>
+          <th>设备IP</th>
+          <th>设备编号</th>
+          <th>责任人Q码</th>
+          <th>密级</th>
+          <th>所属部门</th>
+          <th>使用地点</th>
+          <th>是否在用</th>
+          <th>创建人</th>
+          <th>创建时间</th>
+          <th>修改人</th>
+          <th>修改时间</th>
+          <th>编辑</th>
+          <th>保存</th>
+        </tr>
+        
+
+        <tr v-for="(v,i) in list">
+          <td>{{i+1}}</td>
+          <td>{{v.equipIp}}</td>
+          <td>{{v.equipCode}}</td>
+          <td>{{v.userCode}}</td>
+          <td>{{v.secretLevel}}</td>
+          <td>{{v.deptNo}}</td>
+          <td>{{v.userLocation}}</td>
+          <td>{{v.onUse}}</td>
+          <td>{{v.createUser}}</td>
+          <td>{{v.createDate}}</td>
+          <td>{{v.updateUser}}</td>
+          <td>{{v.updateDate}}</td>
+          <td><a href="#">编辑</a></td>
+          <td><a href="#">保存</a></td>
+
+        </tr>
+        <tr v-if="list.length===0">
+          <td colspan="13">数据连接失败</td>
+        </tr>
+      </table>
+
+    </div>
+    </div>
+    <template>
+      <el-card class="box-card">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>离线终端</el-breadcrumb-item>
+          <el-breadcrumb-item>离线终端管理</el-breadcrumb-item>
+        </el-breadcrumb>
+
+
+
+      </el-card>
+    </template>
+
+
+
+    <script src="./vue.js"></script>
+    <script>
+      var list=[{
+        equipIp:'1.2.3',
+        equipCode:'123',
+        userCode:'29500516',
+        secretLevel:'非涉密',
+        deptNo:'科信部',
+        userLocation:'653',
+        onUse:'是',
+        createUser:'侯梦',
+        createDate:'2019.01.09',
+        updateUser:'侯梦',
+        updateDate:'2019.01.09'
+      },
+
+      {
+        equipIp:'1.2.4',
+        equipCode:'456',
+        userCode:'29500516',
+        secretLevel:'涉密',
+        deptNo:'科信部',
+        userLocation:'653#303',
+        onUse:'否',
+        createUser:'侯梦嘉',
+        createDate:'2019.01.10',
+        updateUser:'侯梦',
+        updateDate:'2019.01.10'
+      },
+
+        
+]
+
+
+      new Vue({
+        el:'#app',
+        data:{
+          list,
+          //输入框要绑定的数据
+          itemname:''
+
+        },
+        methods:{
+          //添加设备的方法
+          addEquip(){
+            this.list.unshift({
+              equipIp:this.equipIp,
+                date:new Date()
+              
+            });
+          }
+
+        }
+
+      
+      
+      })
+    
+    
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
